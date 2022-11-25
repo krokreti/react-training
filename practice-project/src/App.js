@@ -1,4 +1,5 @@
 import './App.css';
+import HelloWorld from './Components/HelloWorld';
 
 function App() {
 
@@ -10,6 +11,7 @@ function App() {
       <h1>Olá React</h1>
       <p> Bem-vindo, {name} </p>
       <img src={url} alt="Minha imagem"/>
+      <HelloWorld/>
     </div>
   );
 }
