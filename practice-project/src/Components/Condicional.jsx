@@ -19,7 +19,7 @@ function Condicional() {
         <div>
             <h2>Cadastre o seu e-mail:</h2>
             <form>
-                <input type="text" placeholder="Digite o seu email..." onChange={(e) => setEmail(e.target.value)}/>
+                <input type="text" value={email} placeholder="Digite o seu email..." onChange={(e) => setEmail(e.target.value)}/>
                 <button type="submit" onClick={enviarEmail}>Enviar Email</button>
             </form>
             {userEmail && (
