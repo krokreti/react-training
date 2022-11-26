@@ -1,8 +1,11 @@
 import './App.css';
+import Evento from './Components/Evento';
 import HelloWorld from './Components/HelloWorld';
 import List from './Components/List';
 import Pessoa from './Components/Pessoa';
 import SayMyName from './Components/SayMyName';
+import Form from './Components/Form'
+
 
 
 
@@ -21,6 +24,8 @@ function App() {
       <SayMyName nome="Beto" />
       <Pessoa nome="Davi" idade="29" profissao="Programador" foto={url}/>
       <List/>
+      <Evento/>
+      <Form/>
     </div>
   );
 }
