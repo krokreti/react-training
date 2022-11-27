@@ -6,11 +6,17 @@ import Pessoa from './Components/Pessoa';
 import SayMyName from './Components/SayMyName';
 import Form from './Components/Form'
 import Condicional from './Components/Condicional';
+import OutraLista from './Components/OutraLista';
+import SeuNome from './Components/SeuNome';
+import { useState } from 'react';
+import Saudacao from './Components/Saudacao';
 
 function App() {
 
   const name = "Davi";
   const url = "https://via.placeholder.com/150";
+  const meusItens = ['React', 'Vue', 'Angular']
+  const [nome, setNome] = useState();
 
   return (
     <div className="App">
@@ -26,6 +32,14 @@ function App() {
       <Form/>
       <h1>Renderização Condicional</h1>
       <Condicional/>
+      <h1>Renderização de Listas</h1>
+      <OutraLista itens={meusItens} />
+      <OutraLista itens={[]} />
+      <h1>State Lift</h1>
+      <SeuNome setNome={setNome} />
+      {nome}
+      <Saudacao nome={nome} />
+
     </div>
   );
 }
