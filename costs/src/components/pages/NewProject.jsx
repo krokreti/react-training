@@ -5,7 +5,7 @@ import styles from './NewProject.module.css'
 
 
 function NewProject() {
-    const history = useNavigate()
+    const navigate = useNavigate()
 
     function createProject(project) {
         project.costs = 0
@@ -20,7 +20,7 @@ function NewProject() {
         }).then(response => response.json())
         .then(data => {
             console.log(data)
-            history.push("/projects", {message: 'Projeto criadoa com sucesso!'})
+            navigate("/projects", {message: 'Projeto criadoa com sucesso!'})
         }) 
         .catch(err => console.log(err))
     }
