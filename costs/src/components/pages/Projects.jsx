@@ -45,6 +45,9 @@ const [removeLoading, setRemoveLoading] = useState(false)
                     <ProjectCard name={project.name} id={project.id} category={project.category.name} budget={project.budget} key={project.id}/>
                 ))}
                 {!removeLoading && <Loading/>}
+                {removeLoading && projects.length===0 && (
+                    <p>Não há projetos cadastrados!</p>
+                )}
             </Container>
         </div>
     )
