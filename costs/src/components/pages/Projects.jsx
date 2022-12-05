@@ -5,9 +5,11 @@ import Container from "../layout/Container"
 import LinkButton from "../layout/LinkButton"
 import ProjectCard from "../project/ProjectCard"
 import { useState, useEffect } from "react"
+import Loading from "../layout/Loading"
 
 function Projects() {
 const [projects, setProjects] = useState([])
+const [removeLoading, setRemoveLoading] = useState(false)
 
     const location = useLocation();
     let message = '';
@@ -25,6 +27,7 @@ const [projects, setProjects] = useState([])
         .then(data => {
             console.log(data)
             setProjects(data)
+            setRemoveLoading(true)
         })
         .catch(err => console.log(err))
     }, [])
@@ -41,6 +44,7 @@ const [projects, setProjects] = useState([])
                 projects.map(project => (
                     <ProjectCard name={project.name} id={project.id} category={project.category.name} budget={project.budget} key={project.id}/>
                 ))}
+                {!removeLoading && <Loading/>}
             </Container>
         </div>
     )
