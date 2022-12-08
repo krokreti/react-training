@@ -8,7 +8,8 @@ import styles from './ProjectForm.module.css'
 
 function ProjectForm({ btnText, handleSubmit, projectData }) {
     const [categories, setCategories] = useState([]);
-    const [project, setProject] = useState([projectData || {} ]);
+    // const [project, setProject] = useState([projectData || {} ]);
+    const [project, setProject] = useState(projectData || {} );
     
     // para fazer requisiçoes à api
     useEffect(() => {
