@@ -32,8 +32,9 @@ const App = () => {
   const addExpenseHandler = expense => {
     // setExpenses( [expense,...expenses] )
     //forma limpa de atualizar o snapshot do array
+    
     setExpenses(prevExpenses => {
-      return [expense, prevExpenses]
+      return [expense, ...prevExpenses]
     })
   };
 
