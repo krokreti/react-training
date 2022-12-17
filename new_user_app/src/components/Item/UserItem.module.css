@@ -1,0 +1,7 @@
+.userItem {
+    line-height: 20px;
+    border: 1px solid rgb(223, 225, 230);
+    width: 100%;
+    padding: 0.5rem;
+    margin: 10px 0;
+}
