@@ -19,6 +19,10 @@ const Form = props => {
         setAge(event.target.value)
     }
 
+    const onCloseDialog = () => {
+        setIsValid(true)
+    }
+
     const addUserHandler = () => {
         if(username.trim().length===0 || age.length === 0) {
             setErrorMessage("Please, fill all the fields!")
@@ -33,7 +37,7 @@ const Form = props => {
         const newUser = {
             id: Math.random(),
             username: username,
-            age: age
+            age: +age
         }
         props.onAddUser(newUser)
     }    
@@ -46,7 +50,7 @@ const Form = props => {
             {!isValid &&
                 <CustomDialog >
                     {errorMessage}
-                    <Button title={'Fechar'} />
+                    <Button title={'Fechar'} onClick={onCloseDialog}/>
                 </CustomDialog>
             }
         </form>
