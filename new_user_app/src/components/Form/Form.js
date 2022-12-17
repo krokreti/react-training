@@ -7,7 +7,7 @@ import styles from './Form.module.css'
 
 const Form = props => {
     const [username, setUsername] = useState('');
-    const [age, setAge] = useState(null);
+    const [age, setAge] = useState();
     const [isValid, setIsValid] = useState(true);
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -39,13 +39,15 @@ const Form = props => {
             username: username,
             age: +age
         }
+        setUsername('')
+        setAge()
         props.onAddUser(newUser)
     }    
 
     return (
         <form className={styles.form}>
-            <Input type={'text'} title={'Username'}  inputChangeHandler={usernameInputHandler}/>
-            <Input type={'number'} title={'Age'}  inputChangeHandler={ageInputHandler}/>
+            <Input type={'text'} title={'Username'}  inputChangeHandler={usernameInputHandler} value={username}/>
+            <Input type={'number'} title={'Age'}  inputChangeHandler={ageInputHandler} value={age || ''}/>
             <Button title={'Add New User'} onClick={addUserHandler}/>
             {!isValid &&
                 <CustomDialog >

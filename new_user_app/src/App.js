@@ -22,7 +22,13 @@ function App() {
       setUserList(prevUsers => {
         return [newUser, ...prevUsers]
       })
-      console.log(userList)
+   }
+
+   const deleteUserHandler = id => {
+     setUserList(prevUsers => {
+      const filteredList = prevUsers.filter( user => ( user.id !== id))
+      return filteredList;
+    })
    }
 
 
@@ -32,7 +38,7 @@ function App() {
         <Form onAddUser={addNewUserHandler} />
       </Card>
       <Card>
-        <UserList userList={userList} />
+        <UserList userList={userList} onDeleteItem={deleteUserHandler} />
       </Card>
     </div>
   );
