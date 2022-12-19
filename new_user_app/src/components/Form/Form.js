@@ -46,8 +46,8 @@ const Form = props => {
 
     return (
         <form className={styles.form}>
-            <Input type={'text'} title={'Username'}  inputChangeHandler={usernameInputHandler} value={username}/>
-            <Input type={'number'} title={'Age'}  inputChangeHandler={ageInputHandler} value={age || ''}/>
+            <Input type={'text'} title={'Username'} name={'username'}  inputChangeHandler={usernameInputHandler} value={username}/>
+            <Input type={'number'} title={'Age'} name={'age'} inputChangeHandler={ageInputHandler} value={age || ''}/>
             <Button title={'Add New User'} onClick={addUserHandler}/>
             {!isValid &&
                 <CustomDialog >
