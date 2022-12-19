@@ -40,7 +40,7 @@ const Form = props => {
             age: +age
         }
         setUsername('')
-        setAge()
+        setAge('')
         props.onAddUser(newUser)
     }    
 
