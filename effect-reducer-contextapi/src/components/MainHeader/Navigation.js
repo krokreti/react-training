@@ -4,9 +4,7 @@ import classes from './Navigation.module.css';
 
 const Navigation = (props) => {
   return (
-    <AuthContext.Consumer>
-      {(ctx) => {
-        return (
+    
           <nav className={classes.nav}>
           <ul>
             {ctx.isLoggedIn && (
@@ -26,9 +24,7 @@ const Navigation = (props) => {
             )}
           </ul>
         </nav>
-        )
-      }}
-    </AuthContext.Consumer>
+    
   );
 };
 
