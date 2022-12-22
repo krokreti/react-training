@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useReducer, useContext } from 'react';
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
+import AuthContext from '../../store/auth-context';
 
 const emailReducer = (state, action) => {
   if(action.type === 'USER_INPUT') {
@@ -23,7 +24,7 @@ const passwordReducer = (state, action) => {
   return {value: '', isValid: false}
 }
 
-const Login = (props) => {
+const Login = () => {
   const [enteredEmail, setEnteredEmail] = useState('');
   const [emailIsValid, setEmailIsValid] = useState();
   const [enteredPassword, setEnteredPassword] = useState('');
@@ -46,11 +47,13 @@ const Login = (props) => {
     {value: '', isValid: null}
     );
 
+    const authCtx = useContext(AuthContext)
+
   useEffect(()=>{
     //usa esse timeout pra nao fazer inumeros acesso a um fetch api
     const identifier = setTimeout(() => {
       setFormIsValid(
-        enteredEmail.includes('@') && enteredPassword.trim().length > 6
+        emailState.value.includes('@') && passwordState.value.trim().length > 6
         );
       }, 500);
 
@@ -58,7 +61,7 @@ const Login = (props) => {
         console.log('Cleanup')
         clearTimeout(identifier)
       }
-  }, [enteredEmail, enteredPassword]);
+  }, [emailState, passwordState]);
 
   const emailChangeHandler = (event) => {
     // setEnteredEmail(event.target.value);
@@ -86,7 +89,7 @@ const Login = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    props.onLogin(emailState.value, passwordState.value);
+    authCtx.onLogin(emailState.value, passwordState.value);
   };
 
   return (
@@ -121,6 +124,7 @@ const Login = (props) => {
           />
         </div>
         <div className={classes.actions}>
+
           <Button type="submit" className={classes.btn} disabled={!formIsValid}>
             Login
           </Button>
