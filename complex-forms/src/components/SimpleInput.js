@@ -33,7 +33,7 @@ const SimpleInput = (props) => {
     } else {
       setFormIsValid(false)
     }
-  }, [enteredNameIsValid, enteredEmailIsValid]) //se tivesse mais inputs para validar, era pra colocar aqui!!
+  }, [enteredNameIsValid, enteredEmailIsValid, enteredAgeIsValid]) //se tivesse mais inputs para validar, era pra colocar aqui!!
 
   // outra possibilidade sem usar useEffect (para economizar renderizaçoes)
   /* 
