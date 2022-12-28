@@ -1,23 +1,34 @@
 import { useEffect, useState } from "react";
+import useInput from "../hooks/use-input";
 
 const SimpleInput = (props) => {
-  const [enteredName, setEnteredName] = useState('');
-  const [enteredNameTouched, setEnteredNameTouched] = useState(false)
   const [formIsValid, setFormIsValid] = useState(false);
 
+  const { 
+    value: enteredAge, 
+    isValid: enteredAgeIsValid,
+    hasError: ageInputHasError,
+    valueChangeHandler: ageChangedHandler,
+    valueBlurHandler: ageBlurHandler,
+    reset: resetAgeInput
+  } = useInput(value => value.trim() !== '');
+
+  const [enteredName, setEnteredName] = useState('');
+  const [enteredNameTouched, setEnteredNameTouched] = useState(false)
+  
   const [enteredEmail, setEnteredEmail] = useState('');
   const [enteredEmailTouched, setEnteredEmailTouched] = useState(false)
-
+  
   const enteredNameIsValid = enteredName.trim() !== '';
   const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
-
+  
   var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   const enteredEmailIsValid = enteredEmail.match(validRegex);
   const emailInputIsInvalid = !enteredEmailIsValid && enteredEmailTouched;
-
+  
 
   useEffect(() => {
-    if(enteredNameIsValid && enteredEmailIsValid) {
+    if(enteredNameIsValid && enteredEmailIsValid && enteredAgeIsValid) {
       setFormIsValid(true)
     } else {
       setFormIsValid(false)
@@ -63,10 +74,12 @@ const SimpleInput = (props) => {
     setEnteredEmail('')
     setEnteredNameTouched(false)
     setEnteredEmailTouched(false)
+    resetAgeInput()
   };
 
   const nameInputClasses = !nameInputIsInvalid ? 'form-control' : 'form-control invalid';
   const emailInputClasses = !emailInputIsInvalid ? 'form-control' : 'form-control invalid';
+  const agelInputClasses = !ageInputHasError ? 'form-control' : 'form-control invalid';
 
   return (
     <form onSubmit={formSubmissionHandler}>
@@ -93,7 +106,20 @@ const SimpleInput = (props) => {
           value={enteredEmail}
         />
         {emailInputIsInvalid && (
-          <p className="error-text">Email must not be valid.</p>
+          <p className="error-text">Please enter a valid email!</p>
+        )}
+      </div>
+      <div className={agelInputClasses}>
+        <label htmlFor='email'>Your Age</label>
+        <input 
+          type='text' 
+          id='age' 
+          onChange={ageChangedHandler} 
+          onBlur={ageBlurHandler}
+          value={enteredAge}
+        />
+        {ageInputHasError && (
+          <p className="error-text">Age must not be empty!</p>
         )}
       </div>
       <div className="form-actions">
