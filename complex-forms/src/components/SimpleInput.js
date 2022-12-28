@@ -1,32 +1,38 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 const SimpleInput = (props) => {
-  const nameInputRef = useRef();
   const [enteredName, setEnteredName] = useState('');
-  const [enteredNameIsValid, setEnteredNameIsValid] = useState(true);
+  const [enteredNameTouched, setEnteredNameTouched] = useState(false)
+
+  const enteredNameIsValid = enteredName.trim() !== '';
+  const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
 
   const nameInputChangeHandler = event => {
     setEnteredName(event.target.value);
   }
 
+  const nameInputBlutHandler = event => {
+    // if (enteredName.trim() === '') {
+    //   setEnteredNameIsValid(false);
+    // }
+    setEnteredNameTouched(true);
+  }
+
   const formSubmissionHandler = event => {
     event.preventDefault();
 
-    if (enteredName.trim() == '') {
-      setEnteredNameIsValid(false);
+    setEnteredNameTouched(true);
+
+    if (!enteredNameIsValid) {
       return;
     }
 
-    setEnteredNameIsValid(true);
-
-    console.log(enteredName)
-    const enteredValue = nameInputRef.current.value
-    console.log("🚀 ~ file: SimpleInput.js:16 ~ formSubmissionHandler ~ enteredValue", enteredValue)
-
+    console.log('foi')
+    setEnteredNameTouched(false)
     setEnteredName('')
   };
 
-  const nameInputClasses = enteredNameIsValid ? 'form-control' : 'form-control invalid';
+  const nameInputClasses = !nameInputIsInvalid ? 'form-control' : 'form-control invalid';
 
   return (
     <form onSubmit={formSubmissionHandler}>
@@ -36,9 +42,11 @@ const SimpleInput = (props) => {
           type='text' 
           id='name' 
           onChange={nameInputChangeHandler} 
-          ref={nameInputRef}
+          onBlur={nameInputBlutHandler}
         />
-        {!enteredNameIsValid && <p className="error-text">Name must not be empty.</p>}
+        {nameInputIsInvalid && (
+          <p className="error-text">Name must not be empty.</p>
+        )}
       </div>
       <div className="form-actions">
         <button>Submit</button>
