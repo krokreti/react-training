@@ -1,10 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { counterActions } from '../store/counter-slice';
 import classes from './Counter.module.css';
-import { counterActions } from '../store';
 
 const Counter = () => {
-  const counter = useSelector(state => state.counter);
-  const show = useSelector(state => state.showCounter);
+  // counter.counter pq counter é o valor declarado no store referindo ao slice de counter, e o .counter é referente a variavel counter do state
+  const counter = useSelector(state => state.counter.counter);
+  const show = useSelector(state => state.counter.showCounter);
   const dispatch = useDispatch();
 
   const incrementHandler = () => {
