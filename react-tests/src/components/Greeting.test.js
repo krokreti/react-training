@@ -49,5 +49,5 @@ describe('Greeting component', () => {
         expect(paragraphElement).toBeNull();
     })
 
-})
+});
 
